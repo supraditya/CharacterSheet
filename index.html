@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		*:focus
+		{
+			outline: 0;
+		}
+		@keyframes spin
+		{
+			0%{transform: rotate(0deg);}
+			100%{transform: rotate(360deg);}
+		}
+		@keyframes rhs
+		{
+			from{ right: -1000px;
+			opacity: 0.0; }
+			to{ right: 100px;
+			opacity: 1.0; }
+
+		}
+		@keyframes lhs
+		{
+			from{opacity: 0.0;}
+			to{opacity: 1.0;}
+		}
+		img
+		{
+			width: 1920px;
+			height: 1080px;
+		}
+		.loader
+		{
+			border: none;
+			border-top: 6px solid #B9210B;
+			border-bottom: 6px solid black;
+			position: absolute;
+  			left: 40.5%;
+			top: 50%;
+			margin: -75px 0 0 75px;
+			z-index: 1;
+			border-radius: 50%;
+			width: 120px;
+			height: 120px;
+			animation: spin 1s linear infinite;
+		}
+		.con
+		{
+			background: url('jon.jpg');
+			background-blend-mode: overlay;
+			background-repeat: no-repeat;
+			filter: blur(10px);
+			transform: scale(1.1);
+		}
+		#one
+		{
+			animation-name: lhs;
+			animation-duration: 1.5s;
+			animation-play-state: paused;
+			position: relative;
+			font-size: 40px;
+			left: 50px;
+			bottom: 1000px;
+			color: #B9210B;
+			border-bottom: 1px solid red;
+			display: inline-block;
+		}
+		#two
+		{
+			animation-name: lhs;
+			animation-duration: 1.5s;
+			animation-play-state: paused;
+			position: relative;
+			font-size: 40px;
+			left: 50px;
+			bottom: 1000px;
+			color: #B9210B;
+			border-bottom: 1px solid red;
+			display: inline-block;
+		}
+		#three
+		{
+			animation-name: lhs;
+			animation-duration: 1.5s;
+			animation-play-state: paused;
+			position: relative;
+			font-size: 40px;
+			left: 50px;
+			bottom: 1000px;
+			color: #B9210B;
+			border-bottom: 1px solid red;
+			display: inline-block;
+		}
+		#four
+		{
+			animation-name: lhs;
+			animation-duration: 1.5s;
+			animation-play-state: paused;
+			position: relative;
+			font-size: 40px;
+			left: 50px;
+			bottom: 1000px;
+			color: #B9210B;
+			border-bottom: 1px solid red;
+			display: inline-block;
+		}
+		#name
+		{
+			animation-name: rhs;
+			animation-duration:1.6s;
+			animation-play-state: paused;
+			right: 100px;
+			text-align: right;
+			text-transform: uppercase;
+			position: relative;
+			bottom: 1000px;
+			font-family: Calibri light;
+			font-size: 22px;
+		}
+		#gen
+		{
+			animation-name: rhs;
+			animation-duration: 1.8s;
+			animation-play-state: paused;
+			text-align: right;
+			text-transform: uppercase;
+			position: relative;
+			right: 100px;
+			bottom: 1000px;
+			font-family: Calibri light;
+			font-size: 22px;
+		}
+		#title
+		{
+			animation-name: rhs;
+			animation-duration: 2s;
+			animation-play-state: paused;
+			text-align: right;
+			text-transform: uppercase;
+			position: relative;
+			right: 100px;
+			bottom: 1000px;
+			word-wrap: break-word;
+			font-family: Calibri light;
+			font-size: 22px;
+		}
+		#play
+		{
+			animation-name: rhs;
+			animation-duration: 2.2s;
+			animation-play-state: paused;
+			text-align: right;
+			text-transform: uppercase;
+			position: relative;
+			right: 100px;
+			bottom: 1000px;
+			font-family: Calibri light;
+			font-size: 22px;
+		}
+		.buttondiv
+		{
+			text-align: center;
+		}
+		#begin
+		{
+			position: absolute;
+			transform: translate(-50%,-50%);
+			animation-play-state: paused;
+			text-align: center;
+			bottom: 100px;
+			background-color: gray;
+			color: white;
+			font-family: Helvetica;
+			font-size: 100%;
+			height: 40px;
+			width: 200px;
+			border-radius: 8px;
+			border-style: 4px solid;
+			border-color: ##B9210B;
+		}
+	</style>
+	<title>Character sheet</title>
+</head>
+<body onload="preload()">
+	<div class="loader"></div>
+	<div class="con">
+		<img src="jon.jpg">
+	</div>
+	<p><div id="one"></div><div id="name"></div></p>
+	<p><div id="two"></div><div id="gen"></div></p>
+	<p><div id="three"></div><div id="title"></div></p>
+	<p><div id="four"></div><div id="play"></div></p>
+	<div class="buttondiv">
+	<button id="begin" onclick="gotit()">Know Something.</button>
+	</div>
+</body>
+<script type="text/javascript">
+	function preload()
+	{
+		document.querySelector('.loader').style.display="none";
+
+	}
+	function gotit()
+	{
+		var i=0;
+		var g=new XMLHttpRequest();
+		g.open('GET','https://anapioficeandfire.com/api/characters/583',true);
+		g.onload=function()
+		{
+			if(this.status==200)
+			{
+				var t=JSON.parse(this.responseText);
+				var out1=t.name;
+				var out2=t.gender;
+				var out3=t.titles;
+				var out4=t.playedBy;
+			}
+			var nm=document.getElementById('name');
+			var ge=document.getElementById('gen');
+			var ti=document.getElementById('title');
+			var pl=document.getElementById('play');
+			var nm1=document.getElementById('one');
+			var ge1=document.getElementById('two');
+			var ti1=document.getElementById('three');
+			var pl1=document.getElementById('four');
+			nm1.innerHTML="NAME&nbsp&nbsp&nbsp";
+			ge1.innerHTML="GENDER&nbsp&nbsp&nbsp";
+			ti1.innerHTML="TITLE&nbsp&nbsp&nbsp";
+			pl1.innerHTML="PLAYED BY&nbsp&nbsp&nbsp";
+			nm1.style.animationPlayState='running';
+			ge1.style.animationPlayState='running';
+			ti1.style.animationPlayState='running';
+			pl1.style.animationPlayState='running';
+			nm.innerHTML=out1;
+			nm.style.color="white";
+			ge.innerHTML=out2;
+			ge.style.color="white";
+			ti.innerHTML='"'+out3+'"';
+			ti.style.color="white";
+			pl.innerHTML=out4;
+			pl.style.color="white";
+			nm.style.animationPlayState='running';
+			ge.style.animationPlayState='running';
+			ti.style.animationPlayState='running';
+			pl.style.animationPlayState='running';
+		}
+		g.send();
+	}
+	</script>
+</html>
